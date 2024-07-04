@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "backend-conectatea"
+version = "0.1.0"
+description = "Repositório do backend para o desenvolvimento do projeto de engenharia de software"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "^3.0.3"
+flask-sqlalchemy = "^3.1.1"
+
+[tool.poetry.group.dev.dependencies]
+safety = "^2.3.5"
+prospector = "^1.10.3"
+isort = "^5.13.2"
+black = "^24.2.0"
+taskipy = "^1.12.2"
+ruff = "^0.5.0"
+pre-commit = "^3.7.1"
+
+[tool.taskipy.tasks]
+lint = "black --check --diff . && isort --check diff ."
+lint-exec = "black . && isort ."
+prospector = "prospector --zero-exit ."
+test = "pytest -s -x --cov=/app -vv"
+start_job = "serverless offline --stage=prod"
+start_script = "python -m run"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
