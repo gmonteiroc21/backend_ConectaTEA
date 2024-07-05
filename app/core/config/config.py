@@ -1,24 +1,27 @@
 import os
-from typing import Optional
+from typing import Optional, ClassVar
 
 from dotenv import load_dotenv
 from pydantic import (PostgresDsn, ValidationError, ValidationInfo,
                       field_validator)
 from pydantic_settings import BaseSettings
+from sqlalchemy.ext.declarative import declarative_base
 
 load_dotenv()
 
 
 class Settings(BaseSettings):
     CONNECTION_SCHEMA: Optional[PostgresDsn] = None
-
     AWS_KEY: Optional[str] = None
     AWS_SECRET: Optional[str] = None
+    
+    DBBaseModel: ClassVar = declarative_base()
+    API_V1_STR: str = "/api/v1"
 
     @field_validator("CONNECTION_SCHEMA")
     def database_schema(cls, _: str, info: ValidationInfo):
         schema = {
-            "scheme": "postgresql",
+            "scheme": "postgresql+asyncpg",
             "username": os.getenv("DB_USER"),
             "password": os.getenv("DB_PASSWORD"),
             "host": os.getenv("DB_HOST"),
