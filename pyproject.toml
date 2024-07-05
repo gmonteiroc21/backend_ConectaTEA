@@ -7,8 +7,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-flask = "^3.0.3"
-flask-sqlalchemy = "^3.1.1"
+fastapi = "^0.111.0"
+uvicorn = "^0.30.1"
+pydantic-settings = "^2.3.4"
 
 [tool.poetry.group.dev.dependencies]
 safety = "^2.3.5"
