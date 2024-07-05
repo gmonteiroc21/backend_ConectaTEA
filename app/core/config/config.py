@@ -1,5 +1,5 @@
 import os
-from typing import Optional, ClassVar
+from typing import ClassVar, Optional
 
 from dotenv import load_dotenv
 from pydantic import (PostgresDsn, ValidationError, ValidationInfo,
@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     CONNECTION_SCHEMA: Optional[PostgresDsn] = None
     AWS_KEY: Optional[str] = None
     AWS_SECRET: Optional[str] = None
-    
+
     DBBaseModel: ClassVar = declarative_base()
     API_V1_STR: str = "/api/v1"
 
